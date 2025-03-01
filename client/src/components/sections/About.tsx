@@ -15,7 +15,7 @@ export default function About() {
           <h2 className="text-3xl font-bold mb-8">About Me</h2>
           <Card>
             <CardContent className="p-6">
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                   <p className="text-lg mb-4">
                     I'm a software engineer with X years of experience building web applications
@@ -26,16 +26,20 @@ export default function About() {
                     Currently, I'm focused on [current focus/interests]. I'm passionate about
                     [specific areas of interest] and always excited to learn new technologies.
                   </p>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p>🎓 Education: Your Degree</p>
+                    <p>📍 Location: Your Location</p>
+                    <p>💼 Current Role: Your Role</p>
+                    <p>🌟 Interests: Interest 1, Interest 2</p>
+                    <p>🎯 Goals: Your Professional Goals</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">Quick Facts</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>🎓 Education: Your Degree</li>
-                    <li>📍 Location: Your Location</li>
-                    <li>💼 Current Role: Your Role</li>
-                    <li>🌟 Interests: Interest 1, Interest 2</li>
-                    <li>🎯 Goals: Your Professional Goals</li>
-                  </ul>
+                <div className="relative aspect-square rounded-xl overflow-hidden">
+                  <img
+                    src="https://avatars.githubusercontent.com/u/yourusername"
+                    alt="Profile"
+                    className="object-cover w-full h-full"
+                  />
                 </div>
               </div>
             </CardContent>

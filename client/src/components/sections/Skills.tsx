@@ -1,19 +1,42 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { fadeIn } from "@/lib/motion";
+import { 
+  SiReact, SiTypescript, SiNextdotjs, SiTailwindcss, SiRedux,
+  SiNodedotjs, SiExpress, SiPython, SiPostgresql, SiMongodb,
+  SiGit, SiDocker, SiAwslambda, SiGithubactions, SiLinux
+} from "react-icons/si";
 
 const skillCategories = [
   {
     title: "Frontend",
-    skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Redux"],
+    skills: [
+      { name: "React", icon: SiReact },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Redux", icon: SiRedux },
+    ],
   },
   {
     title: "Backend",
-    skills: ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB"],
+    skills: [
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Express", icon: SiExpress },
+      { name: "Python", icon: SiPython },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MongoDB", icon: SiMongodb },
+    ],
   },
   {
     title: "DevOps & Tools",
-    skills: ["Git", "Docker", "AWS", "CI/CD", "Linux"],
+    skills: [
+      { name: "Git", icon: SiGit },
+      { name: "Docker", icon: SiDocker },
+      { name: "AWS", icon: SiAwslambda },
+      { name: "CI/CD", icon: SiGithubactions },
+      { name: "Linux", icon: SiLinux },
+    ],
   },
 ];
 
@@ -33,14 +56,15 @@ export default function Skills() {
               <Card key={index}>
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-primary/10 rounded-full text-sm"
+                      <div
+                        key={skill.name}
+                        className="flex items-center gap-2 px-3 py-2 bg-primary/10 rounded-full"
                       >
-                        {skill}
-                      </span>
+                        <skill.icon className="h-5 w-5" />
+                        <span className="text-sm">{skill.name}</span>
+                      </div>
                     ))}
                   </div>
                 </CardContent>

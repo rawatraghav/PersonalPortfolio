@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeIn } from "@/lib/motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { title: "About", href: "#about" },
@@ -32,7 +33,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.title}
@@ -45,6 +46,7 @@ export default function Header() {
                 {link.title}
               </motion.a>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
@@ -78,6 +80,9 @@ export default function Header() {
                     {link.title}
                   </a>
                 ))}
+                <div className="pt-2">
+                  <ThemeToggle />
+                </div>
               </div>
             </motion.div>
           )}
