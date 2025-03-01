@@ -62,7 +62,7 @@ export default function Skills() {
                         key={skill.name}
                         className="flex items-center gap-2 px-3 py-2 bg-background rounded-full border"
                       >
-                        <skill.icon className="h-5 w-5" />
+                        <skill.icon className="h-5 w-5" style={{ color: 'currentcolor' }} />
                         <span className="text-sm">{skill.name}</span>
                       </div>
                     ))}
