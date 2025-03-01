@@ -60,7 +60,7 @@ export default function Skills() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-2 px-3 py-2 bg-primary/10 rounded-full"
+                        className="flex items-center gap-2 px-3 py-2 bg-background rounded-full border"
                       >
                         <skill.icon className="h-5 w-5" />
                         <span className="text-sm">{skill.name}</span>
