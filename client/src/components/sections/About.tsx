@@ -36,7 +36,7 @@ export default function About() {
                 </div>
                 <div className="relative aspect-square rounded-xl overflow-hidden">
                   <img
-                    src="../../src/public/me.JPEG"
+                    src="https://i.imgur.com/LOgXbBL.jpeg"
                     alt="Profile"
                     className="object-cover w-full h-full"
                   />
