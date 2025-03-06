@@ -24,7 +24,7 @@ export default function Contact() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asChild>
-                    <a href="mailto:your.email@example.com">
+                    <a href="mailto:rr3418@nyu.edu">
                       <Mail className="mr-2 h-4 w-4" />
                       Email Me
                     </a>
