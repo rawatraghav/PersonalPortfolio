@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,21 +14,25 @@ const navLinks = [
   { title: "Contact", href: "#contact" },
 ];
 
+// Get base path from environment or default to '/'
+const base = import.meta.env.VITE_BASE_URL || '/';
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/">
+          <Link href={base}>
             <motion.a
               variants={fadeIn("right", 0.1)}
               initial="hidden"
               animate="show"
               className="text-xl font-bold cursor-pointer"
             >
-              Raghav Rawat
+              YourName
             </motion.a>
           </Link>
 
