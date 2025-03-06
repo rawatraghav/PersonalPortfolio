@@ -4,7 +4,11 @@ import { fadeIn } from "@/lib/motion";
 import { 
   SiReact, SiTypescript, SiNextdotjs, SiTailwindcss, SiRedux,
   SiNodedotjs, SiExpress, SiPython, SiPostgresql, SiMongodb,
-  SiGit, SiDocker, SiAwslambda, SiGithubactions, SiLinux
+  SiGit, SiDocker, SiAmazon, SiGithubactions, SiLinux, 
+  SiDjango, SiFlask, SiFastapi, SiTensorflow, SiPytorch,
+  SiLangchain, SiHuggingface, SiApachespark,
+  SiGooglecloud, SiKubernetes, SiJavascript, SiMysql,
+  SiCplusplus
 } from "react-icons/si";
 
 const skillCategories = [
@@ -15,27 +19,46 @@ const skillCategories = [
       { name: "TypeScript", icon: SiTypescript },
       { name: "Next.js", icon: SiNextdotjs },
       { name: "Tailwind CSS", icon: SiTailwindcss },
-      { name: "Redux", icon: SiRedux },
     ],
   },
   {
     title: "Backend",
     skills: [
-      { name: "Node.js", icon: SiNodedotjs },
-      { name: "Express", icon: SiExpress },
-      { name: "Python", icon: SiPython },
+      { name: "Django", icon: SiDjango },
+      { name: "Flask", icon: SiFlask },
+      { name: "FastAPI", icon: SiFastapi },
       { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "MongoDB", icon: SiMongodb },
+      { name: "Node.js", icon: SiNodedotjs },
     ],
   },
   {
-    title: "DevOps & Tools",
+    title: "Machine Learning & AI",
     skills: [
-      { name: "Git", icon: SiGit },
+      { name: "TensorFlow", icon: SiTensorflow },
+      { name: "PyTorch", icon: SiPytorch },
+      { name: "LangChain", icon: SiLangchain },
+      { name: "Hugging Face", icon: SiHuggingface },
+      { name: "Spark", icon: SiApachespark },
+    ],
+  },
+  {
+    title: "DevOps & Cloud",
+    skills: [
+      { name: "AWS", icon: SiAmazon },
+      { name: "GCP", icon: SiGooglecloud },
       { name: "Docker", icon: SiDocker },
-      { name: "AWS", icon: SiAwslambda },
+      { name: "Kubernetes", icon: SiKubernetes },
       { name: "CI/CD", icon: SiGithubactions },
-      { name: "Linux", icon: SiLinux },
+    ],
+  },
+  {
+    title: "Programming Languages",
+    skills: [
+      { name: "Python", icon: SiPython },
+      { name: "C++", icon: SiCplusplus },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "SQL", icon: SiMysql },
+      // { name: "Java", icon: SiJava },
     ],
   },
 ];

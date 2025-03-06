@@ -31,7 +31,7 @@ export default function Contact() {
                   </Button>
                   <Button variant="outline" asChild>
                     <a
-                      href="https://linkedin.com/in/yourusername"
+                      href="https://linkedin.com/in/raghav-rawat"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -41,7 +41,7 @@ export default function Contact() {
                   </Button>
                   <Button variant="outline" asChild>
                     <a
-                      href="https://github.com/yourusername"
+                      href="https://github.com/rawatraghav"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

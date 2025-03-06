@@ -6,13 +6,30 @@ import { fadeIn } from "@/lib/motion";
 
 const projects = [
   {
-    title: "Project Name",
-    description: "A brief description of the project and its impact.",
-    technologies: ["React", "Node.js", "TypeScript"],
-    github: "https://github.com/yourusername/project",
-    live: "https://project-demo.com",
+    title: "WIRIN",
+    description: "Developed deep learning models for acoustic event annotation in autonomous vehicles, improving detection accuracy by 70%.",
+    technologies: ["NumPy", "Librosa", "TensorFlow"],
+    github: "https://github.com/rawatraghav/AcousticDL-EmergencySounds",
+    live: null
   },
-  // Add more projects...
+  {
+    title: "DOHlyzer",
+    description: "Analyzed network traffic using deep learning to identify malicious activities, processing over 1.2M packets of HTTPS traffic.",
+    technologies: ["PyTorch", "Scapy", "NetworkX"],
+    github: null,
+    live: "https://ieeexplore.ieee.org/abstract/document/9587555"
+  },
+  {
+    title: "RxVision",
+    description: "A solution to drug underuse and overuse through paired patient-medicine tracking.",
+    technologies: ["TensorFlow", "Next.js", "Flask", "Redis", "OpenCV"],
+    github: null,
+    live: "https://hacklytics-2024.devfolio.co/projects/rxvision-308a",
+    highlights: [
+      "Developed FaceNet feature extractor for face embeddings.",
+      "Fine-tuned GoogLeNet for available medicine classes."
+    ]
+  },
 ];
 
 export default function Projects() {

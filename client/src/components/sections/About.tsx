@@ -18,25 +18,25 @@ export default function About() {
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                   <p className="text-lg mb-4">
-                    I'm a software engineer with X years of experience building web applications
-                    and distributed systems. My journey in tech started with [your background],
-                    and I've since worked on projects ranging from [types of projects].
+                    I'm a software engineer with experience in machine learning, distributed systems,  
+                    and full-stack development. My journey in tech started with my background in Computer Engineering,  
+                    and I've since worked on projects involving AI research, cloud computing, and scalable backend systems.
                   </p>
                   <p className="text-lg mb-4">
-                    Currently, I'm focused on [current focus/interests]. I'm passionate about
-                    [specific areas of interest] and always excited to learn new technologies.
+                    Currently, I'm focused on generative AI and MLOps. I'm passionate about  
+                    building efficient AI-powered applications and optimizing machine learning pipelines.
                   </p>
                   <div className="space-y-2 text-muted-foreground">
-                    <p>🎓 Education: Your Degree</p>
-                    <p>📍 Location: Your Location</p>
-                    <p>💼 Current Role: Your Role</p>
-                    <p>🌟 Interests: Interest 1, Interest 2</p>
-                    <p>🎯 Goals: Your Professional Goals</p>
+                    <p>🎓 Education: MS in Computer Engineering, New York University</p>
+                    <p>📍 Location: New York City, NY</p>
+                    <p>💼 Current Role: Machine Learning Intern at MARV Capital</p>
+                    <p>🌟 Interests: Machine Learning, Generative AI, Distributed Systems</p>
+                    <p>🎯 Goals: Advancing AI-driven applications and scalable software architectures</p>
                   </div>
                 </div>
                 <div className="relative aspect-square rounded-xl overflow-hidden">
                   <img
-                    src="https://avatars.githubusercontent.com/u/yourusername"
+                    src="../../src/public/me.JPEG"
                     alt="Profile"
                     className="object-cover w-full h-full"
                   />

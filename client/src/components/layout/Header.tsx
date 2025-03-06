@@ -28,7 +28,7 @@ export default function Header() {
               animate="show"
               className="text-xl font-bold cursor-pointer"
             >
-              YourName
+              Raghav Rawat
             </motion.a>
           </Link>
 
