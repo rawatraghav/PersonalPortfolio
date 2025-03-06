@@ -1,8 +1,8 @@
-name: Deploy static content to Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -10,36 +10,40 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Setup Node.js
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18  # Adjust to match your project
-
+          node-version: '20'
+          cache: 'npm'
+          
       - name: Install dependencies
-        run: npm install  # or pnpm install / yarn install if you're using those
-
-      - name: Build project
-        run: npm run build  # Make sure this outputs to "dist/public"
+        run: npm ci
+        
+      - name: Build
+        run: npm run build
+        env:
+          VITE_BASE_URL: '/${{ github.event.repository.name }}'
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/public  # This ensures GitHub Pages serves the correct files
+          path: dist/public
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
