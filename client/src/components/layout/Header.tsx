@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,6 @@ const base = import.meta.env.VITE_BASE_URL || '/';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [location] = useLocation();
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur">
@@ -32,7 +31,7 @@ export default function Header() {
               animate="show"
               className="text-xl font-bold cursor-pointer"
             >
-              YourName
+              Raghav
             </motion.a>
           </Link>
 
