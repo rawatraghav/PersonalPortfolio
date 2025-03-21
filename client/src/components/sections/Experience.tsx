@@ -6,6 +6,7 @@ const experiences = [
   {
     title: "Machine Learning Intern",
     company: "MARV Capital",
+    logo: "/images/marv.jpeg",
     period: "Jan 2025 - Present",
     description: "Migrated chatbot service to self-hosted model and optimized API routes for cost efficiency.",
     highlights: [
@@ -17,6 +18,7 @@ const experiences = [
   {
     title: "Software Development Intern",
     company: "New York University",
+    logo: "/images/nyu.png",
     period: "May 2024 - Aug 2024",
     description: "Built an interactive web platform to visualize floor plans and manage academic space efficiently.",
     highlights: [
@@ -28,6 +30,7 @@ const experiences = [
   {
     title: "Graduate Research Assistant (MS Thesis)",
     company: "New York University",
+    logo: "/images/nyu.png",
     period: "Oct 2023 - Present",
     description: "Developed a real-time video alert system for visually impaired individuals.",
     highlights: [
@@ -39,6 +42,7 @@ const experiences = [
   {
     title: "CS Intern",
     company: "Tiny Archives",
+    logo: "/images/tinyarchives.jpeg",
     period: "Jun 2024 - Aug 2024",
     description: "Worked on API integrations and retrieval-augmented generation for a Copilot feature.",
     highlights: [
@@ -50,6 +54,7 @@ const experiences = [
   {
     title: "Data Scientist",
     company: "ZS Associates",
+    logo: "/images/zs.png",
     period: "Feb 2022 - Aug 2023",
     description: "Led data processing and modeling for pharmaceutical clients to optimize investment strategies.",
     highlights: [
@@ -61,6 +66,7 @@ const experiences = [
   {
     title: "Research Intern",
     company: "Samsung R&D",
+    logo: "/images/samsung.png",
     period: "Jul 2021 - Nov 2021",
     description: "Implemented AI-driven optimization strategies for UAV task offloading.",
     highlights: [
@@ -83,14 +89,25 @@ export default function Experience() {
         >
           <h2 className="text-3xl font-bold mb-8">Experience</h2>
           <div className="flex justify-center">
-            <div className="space-y-6 w-full max-w-3xl">
+            <div className="space-y-6 w-full max-w-5xl">
               {experiences.map((exp, index) => (
                 <Card key={index}>
                   <CardHeader>
                     <CardTitle className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-xl font-semibold">{exp.title}</h3>
-                        <p className="text-muted-foreground">{exp.company}</p>
+                      <div className="flex items-center gap-4">
+                        {exp.logo && (
+                          <div className="w-12 h-12 flex-shrink-0">
+                            <img
+                              src={exp.logo}
+                              alt={`${exp.company} logo`}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <h3 className="text-xl font-semibold">{exp.title}</h3>
+                          <p className="text-muted-foreground">{exp.company}</p>
+                        </div>
                       </div>
                       <span className="text-sm text-muted-foreground">{exp.period}</span>
                     </CardTitle>

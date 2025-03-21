@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeIn } from "@/lib/motion";
-import { Mail, Linkedin, Github } from "lucide-react";
+import { Mail, Linkedin, Github, ChevronDown } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -63,6 +63,25 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
+
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 1,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      >
+        <Button 
+          variant="ghost" 
+          size="icon"
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <ChevronDown className="h-6 w-6" />
+        </Button>
+      </motion.div>
     </section>
   );
 }
