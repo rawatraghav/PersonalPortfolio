@@ -45,7 +45,7 @@ const experiences = [
   {
     title: "CS Intern",
     company: "Tiny Archives",
-    logo: "/images/tinyarchives.jpeg",
+    logo: `${baseUrl}/images/tinyarchives.jpeg`,
     period: "Jun 2024 - Aug 2024",
     description: "Worked on API integrations and retrieval-augmented generation for a Copilot feature.",
     highlights: [
@@ -57,7 +57,7 @@ const experiences = [
   {
     title: "Data Scientist",
     company: "ZS Associates",
-    logo: "/images/zs.png",
+    logo: `${baseUrl}/images/zs.png`,
     period: "Feb 2022 - Aug 2023",
     description: "Led data processing and modeling for pharmaceutical clients to optimize investment strategies.",
     highlights: [
@@ -69,7 +69,7 @@ const experiences = [
   {
     title: "Research Intern",
     company: "Samsung R&D",
-    logo: "/images/samsung.png",
+    logo: `${baseUrl}/images/samsung.png`,
     period: "Jul 2021 - Nov 2021",
     description: "Implemented AI-driven optimization strategies for UAV task offloading.",
     highlights: [
