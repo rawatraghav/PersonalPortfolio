@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-  base: '/PersonalPortfolio/',
+  base: process.env.VITE_BASE_URL || '/',
   plugins: [
     react(),
     runtimeErrorOverlay(),
