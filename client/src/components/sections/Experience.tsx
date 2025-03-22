@@ -2,11 +2,14 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fadeIn } from "@/lib/motion";
 
+// Get the base URL from environment variable
+const baseUrl = import.meta.env.VITE_BASE_URL || '';
+
 const experiences = [
   {
     title: "Machine Learning Intern",
     company: "MARV Capital",
-    logo: "/images/marv.jpeg",
+    logo: `${baseUrl}/images/marv.jpeg`,
     period: "Jan 2025 - Present",
     description: "Migrated chatbot service to self-hosted model and optimized API routes for cost efficiency.",
     highlights: [
@@ -18,7 +21,7 @@ const experiences = [
   {
     title: "Software Development Intern",
     company: "New York University",
-    logo: "/images/nyu.png",
+    logo: `${baseUrl}/images/nyu.png`,
     period: "May 2024 - Aug 2024",
     description: "Built an interactive web platform to visualize floor plans and manage academic space efficiently.",
     highlights: [
@@ -30,7 +33,7 @@ const experiences = [
   {
     title: "Graduate Research Assistant (MS Thesis)",
     company: "New York University",
-    logo: "/images/nyu.png",
+    logo: `${baseUrl}/images/nyu.png`,
     period: "Oct 2023 - Present",
     description: "Developed a real-time video alert system for visually impaired individuals.",
     highlights: [
