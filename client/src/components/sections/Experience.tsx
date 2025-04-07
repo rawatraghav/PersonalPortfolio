@@ -5,7 +5,8 @@ import { fadeIn } from "@/lib/motion";
 // Get the base URL from environment variable
 const baseUrl = import.meta.env.VITE_BASE_URL || '';
 
-const experiences = [
+// Export the experiences array
+export const experiences = [
   {
     title: "Machine Learning Intern",
     company: "MARV Capital",
@@ -80,6 +81,7 @@ const experiences = [
   }
 ];
 
+// Export the component as default
 export default function Experience() {
   return (
     <section id="experience" className="py-20 bg-muted/50">
