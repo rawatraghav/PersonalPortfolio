@@ -20,7 +20,7 @@ export default function Hero() {
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8">
             A software engineer passionate about building elegant solutions to complex problems.
-            Currently focused on web development and cloud architecture.
+            I possess a strong expertise in ML Systems, Gen-AI and full-stack development.
           </p>
           <div className="flex gap-4">
             <Button asChild>
