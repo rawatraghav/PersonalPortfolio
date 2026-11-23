@@ -55,7 +55,7 @@ export const experiences: {
   highlights: string[];
 }[] = [
   {
-    title: "Founding Team Engineer",
+    title: "AI Engineer - Founding Team",
     company: "AegisAI Security",
     period: "Sept 2025 — Present",
     location: "New York City",
