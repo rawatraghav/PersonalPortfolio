@@ -1,135 +1,61 @@
-import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { fadeIn } from "@/lib/motion";
+import SectionIntro from "@/components/SectionIntro";
+import { experiences } from "@/data/site";
 
-// Get the base URL from environment variable
-const baseUrl = import.meta.env.VITE_BASE_URL || '';
-
-// Export the experiences array
-export const experiences = [
-  {
-    title: "Machine Learning Intern",
-    company: "MARV Capital",
-    logo: `${baseUrl}/images/marv.jpeg`,
-    period: "Jan 2025 - Present",
-    description: "Migrated chatbot service to self-hosted model and optimized API routes for cost efficiency.",
-    highlights: [
-      "Transitioned from Mistral APIs to Deepseek on AWS Bedrock",
-      "Reduced API costs by 80%",
-      "Managed and tested API route functionality"
-    ]
-  },
-  {
-    title: "Software Development Intern",
-    company: "New York University",
-    logo: `${baseUrl}/images/nyu.png`,
-    period: "May 2024 - Aug 2024",
-    description: "Built an interactive web platform to visualize floor plans and manage academic space efficiently.",
-    highlights: [
-      "Developed an interactive tool for visualizing classrooms, labs, and offices across 5 academic buildings.",
-      "Enhanced space management efficiency by 30% for 300+ faculty and staff.",
-      "Implemented real-time equipment data updates, reducing tracking time by 25%."
-    ]
-  },
-  {
-    title: "Graduate Research Assistant (MS Thesis)",
-    company: "New York University",
-    logo: `${baseUrl}/images/nyu.png`,
-    period: "Oct 2023 - Present",
-    description: "Developed a real-time video alert system for visually impaired individuals.",
-    highlights: [
-      "Designed a real-time depth mapping network",
-      "Reduced inference time by 50 ms",
-      "Improved model accuracy by 15% over state-of-the-art methods"
-    ]
-  },
-  {
-    title: "CS Intern",
-    company: "Tiny Archives",
-    logo: `${baseUrl}/images/tinyarchives.jpeg`,
-    period: "Jun 2024 - Aug 2024",
-    description: "Worked on API integrations and retrieval-augmented generation for a Copilot feature.",
-    highlights: [
-      "Developed API integrations for third-party platform synchronization",
-      "Engineered data pipelines for RAG system",
-      "Worked on online learning techniques and model training"
-    ]
-  },
-  {
-    title: "Data Scientist",
-    company: "ZS Associates",
-    logo: `${baseUrl}/images/zs.png`,
-    period: "Feb 2022 - Aug 2023",
-    description: "Led data processing and modeling for pharmaceutical clients to optimize investment strategies.",
-    highlights: [
-      "Processed patient-level data for Fortune 50 pharma clients",
-      "Improved decision-making accuracy by 20%, saving $4M",
-      "Enhanced marketing ROI by 15% through statistical modeling"
-    ]
-  },
-  {
-    title: "Research Intern",
-    company: "Samsung R&D",
-    logo: `${baseUrl}/images/samsung.png`,
-    period: "Jul 2021 - Nov 2021",
-    description: "Implemented AI-driven optimization strategies for UAV task offloading.",
-    highlights: [
-      "Developed Monte Carlo Tree Search (MCTS) for UAV efficiency",
-      "Improved task offloading by 71%",
-      "Designed reinforcement learning models for UAV trajectory management"
-    ]
-  }
-];
-
-// Export the component as default
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 bg-muted/50">
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={fadeIn("up", 0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold mb-8">Experience</h2>
-          <div className="flex justify-center">
-            <div className="space-y-6 w-full max-w-5xl">
-              {experiences.map((exp, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle className="flex justify-between items-start">
-                      <div className="flex items-center gap-4">
-                        {exp.logo && (
-                          <div className="w-12 h-12 flex-shrink-0">
-                            <img
-                              src={exp.logo}
-                              alt={`${exp.company} logo`}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                        )}
-                        <div>
-                          <h3 className="text-xl font-semibold">{exp.title}</h3>
-                          <p className="text-muted-foreground">{exp.company}</p>
-                        </div>
-                      </div>
-                      <span className="text-sm text-muted-foreground">{exp.period}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4">{exp.description}</p>
-                    <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                      {exp.highlights.map((highlight, i) => (
-                        <li key={i}>{highlight}</li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+    <section id="experience" className="scroll-mt-16 border-t border-border">
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <SectionIntro
+          index="02 — Experience"
+          title="Where the work happened."
+          lede="A security startup, an investment firm, and a pharma consultancy. The through-line is models that have to run in production."
+        />
+
+        <ol className="border-t border-border">
+          {experiences.map((exp) => (
+            <li
+              key={`${exp.company}-${exp.period}`}
+              className="grid gap-5 border-b border-border py-8 md:grid-cols-[180px_1fr] md:gap-10 md:py-10"
+            >
+              <div>
+                <p className="font-mono text-xs text-muted-foreground">{exp.period}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{exp.location}</p>
+              </div>
+              <div>
+                <div className="flex items-start gap-4">
+                  {exp.logo ? (
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-white p-1.5">
+                      <img
+                        src={exp.logo}
+                        alt=""
+                        className="h-full w-full object-contain"
+                      />
+                    </span>
+                  ) : (
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-border font-serif text-lg">
+                      {exp.company.slice(0, 1)}
+                    </span>
+                  )}
+                  <div>
+                    <h3 className="font-serif text-2xl tracking-tight md:text-3xl">
+                      {exp.title}
+                    </h3>
+                    <p className="mt-1 text-muted-foreground">{exp.company}</p>
+                  </div>
+                </div>
+                <p className="mt-5 max-w-2xl leading-relaxed">{exp.description}</p>
+                <ul className="mt-4 max-w-2xl space-y-2 text-muted-foreground">
+                  {exp.highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-3 leading-relaxed">
+                      <span aria-hidden className="mt-[0.55em] h-px w-4 shrink-0 bg-primary" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

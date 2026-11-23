@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
+import { createHash } from "crypto";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import path, { dirname } from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { fileURLToPath } from "url";
@@ -8,12 +8,21 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export default defineConfig({
+export default defineConfig(async ({ mode }) => {
+  const fileEnv = loadEnv(mode, __dirname, "");
+  const statsPassword = process.env.STATS_PASSWORD || fileEnv.STATS_PASSWORD || "";
+  const statsPasswordHash = statsPassword
+    ? createHash("sha256").update(statsPassword).digest("hex")
+    : "";
+
+  return {
   base: process.env.VITE_BASE_URL || '/',
+  define: {
+    "import.meta.env.VITE_STATS_PASSWORD_HASH": JSON.stringify(statsPasswordHash),
+  },
   plugins: [
     react(),
     runtimeErrorOverlay(),
-    themePlugin(),
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
@@ -34,4 +43,5 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
   },
+};
 });

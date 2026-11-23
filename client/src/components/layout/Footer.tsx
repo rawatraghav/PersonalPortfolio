@@ -1,55 +1,32 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
-import { fadeIn } from "@/lib/motion";
+import { profile } from "@/data/site";
+
+const links = [
+  { label: "Email", href: `mailto:${profile.email}` },
+  { label: "LinkedIn", href: profile.linkedin },
+  { label: "GitHub", href: profile.github },
+  { label: "Scholar", href: profile.scholar },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-background py-8">
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={fadeIn("up", 0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row justify-between items-center"
-        >
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Raghav Rawat. All rights reserved.
-          </p>
-
-          <div className="flex space-x-6 mt-4 md:mt-0">
+    <footer className="border-t border-border">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+        <div className="flex gap-5">
+          {links.map((link) => (
             <a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              <Github className="h-5 w-5" />
+              {link.label}
             </a>
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Twitter className="h-5 w-5" />
-            </a>
-            <a
-              href="mailto:your.email@example.com"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Mail className="h-5 w-5" />
-            </a>
-          </div>
-        </motion.div>
+          ))}
+        </div>
       </div>
     </footer>
   );

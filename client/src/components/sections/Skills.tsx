@@ -1,100 +1,130 @@
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { fadeIn } from "@/lib/motion";
-import { 
-  SiReact, SiTypescript, SiNextdotjs, SiTailwindcss, SiRedux,
-  SiNodedotjs, SiExpress, SiPython, SiPostgresql, SiMongodb,
-  SiGit, SiDocker, SiAmazon, SiGithubactions, SiLinux, 
-  SiDjango, SiFlask, SiFastapi, SiTensorflow, SiPytorch,
-  SiLangchain, SiHuggingface, SiApachespark,
-  SiGooglecloud, SiKubernetes, SiJavascript, SiMysql,
-  SiCplusplus
+import type { IconType } from "react-icons";
+import SectionIntro from "@/components/SectionIntro";
+import {
+  SiAmazon,
+  SiApacheairflow,
+  SiApachehadoop,
+  SiCplusplus,
+  SiClickhouse,
+  SiDocker,
+  SiFastapi,
+  SiFirebase,
+  SiGit,
+  SiGooglecloud,
+  SiHuggingface,
+  SiKubernetes,
+  SiMysql,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPython,
+  SiPytorch,
+  SiR,
+  SiReact,
+  SiScikitlearn,
+  SiSentry,
+  SiTensorflow,
+  SiTerraform,
+  SiTypescript,
+  SiWeightsandbiases,
 } from "react-icons/si";
 
-const skillCategories = [
+const skillCategories: {
+  title: string;
+  skills: { name: string; icon?: IconType }[];
+}[] = [
   {
-    title: "Frontend",
-    skills: [
-      { name: "React", icon: SiReact },
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "Next.js", icon: SiNextdotjs },
-      { name: "Tailwind CSS", icon: SiTailwindcss },
-    ],
-  },
-  {
-    title: "Backend",
-    skills: [
-      { name: "Django", icon: SiDjango },
-      { name: "Flask", icon: SiFlask },
-      { name: "FastAPI", icon: SiFastapi },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "Node.js", icon: SiNodedotjs },
-    ],
-  },
-  {
-    title: "Machine Learning & AI",
-    skills: [
-      { name: "TensorFlow", icon: SiTensorflow },
-      { name: "PyTorch", icon: SiPytorch },
-      { name: "LangChain", icon: SiLangchain },
-      { name: "Hugging Face", icon: SiHuggingface },
-      { name: "Spark", icon: SiApachespark },
-    ],
-  },
-  {
-    title: "DevOps & Cloud",
-    skills: [
-      { name: "AWS", icon: SiAmazon },
-      { name: "GCP", icon: SiGooglecloud },
-      { name: "Docker", icon: SiDocker },
-      { name: "Kubernetes", icon: SiKubernetes },
-      { name: "CI/CD", icon: SiGithubactions },
-    ],
-  },
-  {
-    title: "Programming Languages",
+    title: "Languages",
     skills: [
       { name: "Python", icon: SiPython },
+      { name: "PyTorch", icon: SiPytorch },
+      { name: "TensorFlow", icon: SiTensorflow },
       { name: "C++", icon: SiCplusplus },
-      { name: "JavaScript", icon: SiJavascript },
+      { name: "Java" },
+      { name: "TypeScript", icon: SiTypescript },
       { name: "SQL", icon: SiMysql },
-      // { name: "Java", icon: SiJava },
+      { name: "R", icon: SiR },
+    ],
+  },
+  {
+    title: "Machine Learning",
+    skills: [
+      { name: "LoRA" },
+      { name: "vLLM" },
+      { name: "HuggingFace", icon: SiHuggingface },
+      { name: "Quantization" },
+      { name: "W&B", icon: SiWeightsandbiases },
+      { name: "MLflow" },
+      { name: "LangSmith" },
+      { name: "RAG" },
+      { name: "Pinecone" },
+      { name: "scikit-learn", icon: SiScikitlearn },
+    ],
+  },
+  {
+    title: "Data / Infra",
+    skills: [
+      { name: "GCP", icon: SiGooglecloud },
+      { name: "AWS", icon: SiAmazon },
+      { name: "Terraform", icon: SiTerraform },
+      { name: "Docker", icon: SiDocker },
+      { name: "Kubernetes", icon: SiKubernetes },
+      { name: "Git", icon: SiGit },
+      { name: "Sentry", icon: SiSentry },
+      { name: "PySpark" },
+      { name: "Hadoop", icon: SiApachehadoop },
+      { name: "Airflow", icon: SiApacheairflow },
+      { name: "Dataiku" },
+      { name: "ClickHouse", icon: SiClickhouse },
+    ],
+  },
+  {
+    title: "Full-Stack",
+    skills: [
+      { name: "React", icon: SiReact },
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "FastAPI", icon: SiFastapi },
+      { name: "REST" },
+      { name: "gRPC" },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Firestore", icon: SiFirebase },
     ],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-muted/50">
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={fadeIn("up", 0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold mb-8">Skills</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {skillCategories.map((category, index) => (
-              <Card key={index}>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {category.skills.map((skill) => (
-                      <div
-                        key={skill.name}
-                        className="flex items-center gap-2 px-3 py-2 bg-background rounded-full border"
-                      >
-                        <skill.icon className="h-5 w-5" style={{ color: 'currentcolor' }} />
-                        <span className="text-sm">{skill.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </motion.div>
+    <section id="skills" className="scroll-mt-16 border-t border-border">
+      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <SectionIntro
+          index="04 — Skills"
+          title="Tools I use in production."
+          lede="Serving, routing, and evaluating models. Distributed systems when the data is too big for one machine."
+        />
+        <div className="border-t border-border">
+          {skillCategories.map((category) => (
+            <div
+              key={category.title}
+              className="grid gap-4 border-b border-border py-6 md:grid-cols-[180px_1fr] md:items-center md:py-7"
+            >
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                {category.title}
+              </h3>
+              <ul className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="inline-flex items-center gap-2 border border-border bg-background px-3 py-2 text-sm"
+                  >
+                    {skill.icon ? (
+                      <skill.icon className="h-4 w-4" aria-hidden />
+                    ) : null}
+                    {skill.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,50 +1,63 @@
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { fadeIn } from "@/lib/motion";
+import SectionIntro from "@/components/SectionIntro";
+import { experiences, profile } from "@/data/site";
+
+const current = experiences[0];
+
+const facts = [
+  { label: "Education", value: "MS, Computer Science — NYU" },
+  { label: "Earlier", value: "BE, Electronics & Communication — RVCE" },
+  { label: "Based", value: profile.location },
+  { label: "Now", value: `${current.title}, ${current.company}` },
+];
 
 export default function About() {
   return (
-    <section id="about" className="py-20">
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={fadeIn("up", 0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-bold mb-8">About Me</h2>
-          <Card>
-            <CardContent className="p-6">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <p className="text-lg mb-4">
-                    I'm a software engineer with experience in machine learning, distributed systems,  
-                    and full-stack development. My journey in tech started with my background in Computer Engineering,  
-                    and I've since worked on projects involving AI research, cloud computing, and scalable backend systems.
-                  </p>
-                  <p className="text-lg mb-4">
-                    Currently, I'm focused on generative AI and MLOps. I'm passionate about  
-                    building efficient AI-powered applications and optimizing machine learning pipelines.
-                  </p>
-                  <div className="space-y-2 text-muted-foreground">
-                    <p>🎓 Education: MS in Computer Engineering, New York University</p>
-                    <p>📍 Location: New York City, NY</p>
-                    <p>💼 Current Role: Machine Learning Intern at MARV Capital</p>
-                    <p>🌟 Interests: Machine Learning, Generative AI, Distributed Systems</p>
-                    <p>🎯 Goals: Advancing AI-driven applications and scalable software architectures</p>
-                  </div>
-                </div>
-                <div className="relative aspect-square rounded-xl overflow-hidden">
-                  <img
-                    src="https://i.imgur.com/LOgXbBL.jpeg"
-                    alt="Profile"
-                    className="object-cover w-full h-full"
-                  />
-                </div>
+    <section id="about" className="scroll-mt-16 border-t border-border">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-28 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <figure>
+            <div className="aspect-[4/5] overflow-hidden bg-muted">
+              <img
+                src={profile.photo}
+                alt="Raghav Rawat"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+              New York City
+            </figcaption>
+          </figure>
+        </div>
+
+        <div className="lg:col-span-7">
+          <SectionIntro index="01 — About" title="Engineer first, then the model." />
+          <div className="max-w-xl space-y-4 text-lg leading-relaxed">
+            <p>
+              I build the systems around large language models: serving,
+              evaluation, and the product that has to stay up after the demo.
+              Right now that is phishing detection at AegisAI. Before that,
+              LLM infrastructure at MARV Capital and claims modeling at ZS.
+            </p>
+            <p>
+              MS in Computer Science from NYU, August 2023 to May 2025, on a
+              merit scholarship. Before that, electronics and communication
+              engineering at R.V. College of Engineering, with a research award.
+            </p>
+          </div>
+          <dl className="mt-10 divide-y divide-border border-y border-border">
+            {facts.map((fact) => (
+              <div
+                key={fact.label}
+                className="grid gap-1 py-4 sm:grid-cols-[140px_1fr] sm:gap-6"
+              >
+                <dt className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                  {fact.label}
+                </dt>
+                <dd>{fact.value}</dd>
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );
