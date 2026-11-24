@@ -253,10 +253,61 @@ async function storeEvent(env, event) {
   await env.VISITS.put("events", JSON.stringify(events.slice(-MAX_EVENTS)));
 }
 
+const OWNER_EMAIL = "rawat.raghav3w@gmail.com";
+
+async function sendPasswordEmail(env) {
+  const password = env.STATS_PASSWORD || "";
+  if (!password) return json({ message: "Email is not configured." }, 503);
+
+  const lastSent = Number((await env.VISITS.get("forgot-at")) || 0);
+  if (Date.now() - lastSent < 10 * 60 * 1000) {
+    return json({ message: "An email was just sent. Check your inbox." }, 429);
+  }
+
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${OWNER_EMAIL}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Origin: "https://rawatraghav.github.io",
+        Referer: "https://rawatraghav.github.io/PersonalPortfolio/stats",
+      },
+      body: JSON.stringify({
+        _subject: "Portfolio stats password",
+        _captcha: "false",
+        _template: "box",
+        password,
+      }),
+    });
+    const payload = await response.json().catch(() => null);
+    const providerMessage = typeof payload?.message === "string" ? payload.message : "";
+    if (/activat|confirm/i.test(providerMessage)) {
+      return json({
+        message: `Check ${OWNER_EMAIL} for an activation link, then try Forgot password again.`,
+      });
+    }
+    const success = payload?.success === true || payload?.success === "true";
+    if (/rate limit/i.test(providerMessage)) {
+      return json({ message: "An email was just sent. Check your inbox." }, 429);
+    }
+    if (!response.ok || !success) return json({ message: "The email could not be sent." }, 502);
+    await env.VISITS.put("forgot-at", String(Date.now()));
+    return json({ message: `Sent to ${OWNER_EMAIL}.` });
+  } catch {
+    return json({ message: "The email could not be sent." }, 502);
+  }
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return empty(204);
     if (!env.VISITS || !env.STATS_PASSWORD) return json({ message: "Analytics is not configured." }, 503);
+
+    const path = new URL(request.url).pathname;
+    if (request.method === "POST" && path.endsWith("/stats/forgot")) {
+      return sendPasswordEmail(env);
+    }
 
     if (request.method === "POST") {
       let body;

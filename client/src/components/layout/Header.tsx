@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { navLinks, profile } from "@/data/site";
 
@@ -74,14 +73,14 @@ export default function Header() {
 
         <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
+            type="button"
             aria-label={isOpen ? "Close menu" : "Open menu"}
             onClick={() => setIsOpen((open) => !open)}
+            className="inline-flex h-10 w-10 items-center justify-center"
           >
             {isOpen ? <X /> : <Menu />}
-          </Button>
+          </button>
         </div>
       </nav>
 

@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Clock, Globe, MapPin, Monitor, Smartphone, Tablet } from "lucide-react";
 import { Link } from "wouter";
-import { analyticsEndpoint } from "@/lib/analytics-endpoint";
+import { analyticsEndpoint, statsForgotEndpoint } from "@/lib/analytics-endpoint";
 
 type SessionClick = {
   label: string;
@@ -146,12 +146,6 @@ function Meta({
 }
 
 const PASSWORD_KEY = "stats-password";
-const PASSWORD_WORKFLOW =
-  "https://github.com/rawatraghav/PersonalPortfolio/actions/workflows/stats-password.yml";
-
-function localStatsServer() {
-  return location.hostname === "localhost" || location.hostname === "127.0.0.1";
-}
 const passwordHash = import.meta.env.VITE_STATS_PASSWORD_HASH as string;
 
 async function sha256(value: string) {
@@ -229,7 +223,7 @@ export default function Stats() {
     setSendingForgot(true);
     setForgotNotice("");
     try {
-      const response = await fetch("/api/stats/forgot", { method: "POST" });
+      const response = await fetch(statsForgotEndpoint(), { method: "POST" });
       const data = (await response.json().catch(() => null)) as { message?: string } | null;
       setForgotNotice(data?.message || "The email could not be sent.");
     } catch {
@@ -277,35 +271,18 @@ export default function Stats() {
               >
                 Unlock
               </button>
-              {localStatsServer() ? (
-                <button
-                  type="button"
-                  onClick={onForgot}
-                  disabled={sendingForgot}
-                  className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline disabled:opacity-60"
-                >
-                  Forgot password
-                </button>
-              ) : (
-                <a
-                  href={PASSWORD_WORKFLOW}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                >
-                  Forgot password
-                </a>
-              )}
+              <button
+                type="button"
+                onClick={onForgot}
+                disabled={sendingForgot}
+                className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline disabled:opacity-60"
+              >
+                Forgot password
+              </button>
             </div>
-            {localStatsServer() && forgotNotice ? (
+            {forgotNotice ? (
               <p className="mt-3 text-sm text-muted-foreground">{forgotNotice}</p>
             ) : null}
-            {localStatsServer() ? null : (
-              <p className="mt-3 text-sm text-muted-foreground">
-                Opens GitHub. Run “Email stats password” while you are logged in, and the
-                password is sent to your inbox.
-              </p>
-            )}
           </form>
         ) : missing ? (
           <p className="mt-8 text-muted-foreground">
