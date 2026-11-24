@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Clock, Globe, MapPin, Monitor, Smartphone, Tablet } from "lucide-react";
 import { Link } from "wouter";
+import { analyticsEndpoint } from "@/lib/analytics-endpoint";
 
 type SessionClick = {
   label: string;
@@ -182,7 +183,7 @@ export default function Stats() {
     sha256(password).then((hash) => {
       if (cancelled || hash !== passwordHash) return;
       setUnlocked(true);
-      fetch("/api/analytics", { headers: { "x-stats-password": password } })
+      fetch(analyticsEndpoint(), { headers: { "x-stats-password": password } })
         .then((response) => {
           if (response.status === 401) throw new Error("unauthorized");
           if (!response.ok) throw new Error("missing");
@@ -308,8 +309,7 @@ export default function Stats() {
           </form>
         ) : missing ? (
           <p className="mt-8 text-muted-foreground">
-            The password is correct. This host does not keep the visit log. Counts are
-            available when the site is served by the local server.
+            The visit log could not be loaded. Refresh the page and try again.
           </p>
         ) : summary ? (
           <>

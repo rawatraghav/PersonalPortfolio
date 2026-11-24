@@ -1,0 +1,10 @@
+name = "portfolio-stats"
+main = "src/index.js"
+compatibility_date = "2026-11-23"
+workers_dev = true
+preview_urls = false
+account_id = "e435912e15a1f66ae22f7875dae554de"
+
+[[kv_namespaces]]
+binding = "VISITS"
+id = "5d7142ab472e4a03854532c76f671c2a"

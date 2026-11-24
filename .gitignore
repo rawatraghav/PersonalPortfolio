@@ -2,6 +2,11 @@ node_modules
 dist
 server
 .env
+.analytics-secrets
+.vercel
+.wrangler
+stats-api/.vercel
+stats-api/.wrangler
 .DS_Store
 server/public
 vite.config.ts.*

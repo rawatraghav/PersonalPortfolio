@@ -1,3 +1,5 @@
+import { analyticsEndpoint } from "./analytics-endpoint";
+
 type AnalyticsEvent = {
   type: "visit" | "click";
   path: string;
@@ -65,7 +67,7 @@ function labelFor(el: Element) {
 
 function sendLocal(event: AnalyticsEvent) {
   const body = JSON.stringify(event);
-  fetch("/api/analytics", {
+  fetch(analyticsEndpoint(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,
