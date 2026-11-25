@@ -4,10 +4,10 @@ import { experiences, profile } from "@/data/site";
 const current = experiences[0];
 
 const facts = [
+  { label: "Now", value: `${current.title}, ${current.company}` },
+  { label: "Based", value: profile.location },
   { label: "Education", value: "MS, Computer Science — NYU" },
   { label: "Earlier", value: "BE, Electronics & Communication — RVCE" },
-  { label: "Based", value: profile.location },
-  { label: "Now", value: `${current.title}, ${current.company}` },
 ];
 
 export default function About() {
