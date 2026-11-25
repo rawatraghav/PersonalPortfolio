@@ -257,7 +257,8 @@ const OWNER_EMAIL = "rawat.raghav3w@gmail.com";
 
 async function sendPasswordEmail(env) {
   const password = env.STATS_PASSWORD || "";
-  if (!password) return json({ message: "Email is not configured." }, 503);
+  const apiKey = env.RESEND_API_KEY || "";
+  if (!password || !apiKey) return json({ message: "Email is not configured." }, 503);
 
   const lastSent = Number((await env.VISITS.get("forgot-at")) || 0);
   if (Date.now() - lastSent < 10 * 60 * 1000) {
@@ -265,33 +266,27 @@ async function sendPasswordEmail(env) {
   }
 
   try {
-    const response = await fetch(`https://formsubmit.co/ajax/${OWNER_EMAIL}`, {
+    const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        Accept: "application/json",
-        Origin: "https://rawatraghav.github.io",
-        Referer: "https://rawatraghav.github.io/PersonalPortfolio/stats",
+        "User-Agent": "portfolio-stats",
       },
       body: JSON.stringify({
-        _subject: "Portfolio stats password",
-        _captcha: "false",
-        _template: "box",
-        password,
+        from: "Portfolio stats <onboarding@resend.dev>",
+        to: [OWNER_EMAIL],
+        subject: "Portfolio stats password",
+        text: `Your portfolio stats password is ${password}`,
       }),
     });
     const payload = await response.json().catch(() => null);
-    const providerMessage = typeof payload?.message === "string" ? payload.message : "";
-    if (/activat|confirm/i.test(providerMessage)) {
-      return json({
-        message: `Check ${OWNER_EMAIL} for an activation link, then try Forgot password again.`,
-      });
+    if (response.status === 429) {
+      return json({ message: "The email service is busy. Try again in a few minutes." }, 429);
     }
-    const success = payload?.success === true || payload?.success === "true";
-    if (/rate limit/i.test(providerMessage)) {
-      return json({ message: "An email was just sent. Check your inbox." }, 429);
+    if (!response.ok || typeof payload?.id !== "string") {
+      return json({ message: "The email could not be sent." }, 502);
     }
-    if (!response.ok || !success) return json({ message: "The email could not be sent." }, 502);
     await env.VISITS.put("forgot-at", String(Date.now()));
     return json({ message: `Sent to ${OWNER_EMAIL}.` });
   } catch {

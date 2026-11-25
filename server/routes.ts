@@ -351,35 +351,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return;
     }
 
+    const apiKey = process.env.RESEND_API_KEY || "";
+    if (!apiKey) {
+      res.status(503).json({ message: "Email is not configured." });
+      return;
+    }
+
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${ownerEmail}`, {
+      const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          Accept: "application/json",
-          Origin: "https://rawatraghav.github.io",
-          Referer: "https://rawatraghav.github.io/PersonalPortfolio/stats",
+          "User-Agent": "portfolio-stats",
         },
         body: JSON.stringify({
-          _subject: "Portfolio stats password",
-          _captcha: "false",
-          _template: "box",
-          password,
+          from: "Portfolio stats <onboarding@resend.dev>",
+          to: [ownerEmail],
+          subject: "Portfolio stats password",
+          text: `Your portfolio stats password is ${password}`,
         }),
       });
-      const payload = (await response.json().catch(() => null)) as {
-        success?: string | boolean;
-        message?: string;
-      } | null;
-      const providerMessage = payload?.message || "";
-      if (/activat|confirm/i.test(providerMessage)) {
-        res.json({
-          message: `Check ${ownerEmail} for an activation link, then try Forgot password again.`,
-        });
+      const payload = (await response.json().catch(() => null)) as { id?: string } | null;
+      if (response.status === 429) {
+        res.status(429).json({ message: "The email service is busy. Try again in a few minutes." });
         return;
       }
-      const success = payload?.success === true || payload?.success === "true";
-      if (!response.ok || !success) {
+      if (!response.ok || typeof payload?.id !== "string") {
         res.status(502).json({ message: "The email could not be sent." });
         return;
       }
